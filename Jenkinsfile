@@ -46,23 +46,35 @@ pipeline {
             }
         }
         
+        stage('tag docker image') {
+            steps {
+               sh "docker tag ${env.image}:${BUILD_NUMBER} ${env.image}:latest"
+            }
+        }
+        
         stage('Verify new docker image(s)') {
             steps {
                 sh('docker images')
             }
         }
-        
+
         stage('push docker image') {
             steps {
                sh "docker push ${env.image}:latest"
             }
         }
+        
+        stage('Verify new docker image(s) 2') {
+            steps {
+                sh('docker images')
+            }
+        }
+   
        
         stage('Deployment'){
             steps {
                 sh "docker-compose up -d"
             }
-            
         }
         // Test v0.1
         // stage('tag docker image') {
