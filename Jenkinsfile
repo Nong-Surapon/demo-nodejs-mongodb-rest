@@ -43,6 +43,7 @@ pipeline {
         stage('Build docker image') {
             steps {
                sh "docker build -t ${env.image} ."
+               sh "docker images"
             }
         }
         
