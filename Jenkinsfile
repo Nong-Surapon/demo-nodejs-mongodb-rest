@@ -50,8 +50,9 @@ pipeline {
             steps {
                 script {
                     withCredentials([string(credentialsId: 'dockerhub-pwd', variable: 'dockerhubpwd')]) {
-                    sh "docker login -u nongdocker -p${dockerhubpwd}"
-                    sh "docker push ${env.image}:latest"
+                        sh "docker login -u nongdocker -p${dockerhubpwd}"
+                        sh "docker push ${env.image}:latest"
+                    }
                 }
             }
         }
