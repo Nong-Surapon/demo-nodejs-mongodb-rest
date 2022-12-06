@@ -1,11 +1,9 @@
 pipeline {
 
-    agent {
-        label 'master'
-    }
+    agent any
 
     environment {
-        image = "atisak/demo-nodejs"
+        image = "nongdocker/demo-nodejs"
         registry = "docker.io"
     }
 
@@ -13,7 +11,7 @@ pipeline {
 
         stage('Checkout') {
             steps {
-                checkout scm
+                git 'https://github.com/Nong-Surapon/demo-nodejs-mongodb-rest'
             }
         }
 
