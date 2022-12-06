@@ -11,7 +11,7 @@ var routes = require('./routes/routes');
 
 var app = express();
 
-// view engine setup //Jenkins
+// view engine setup //Jenkins for web-hook
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'pug');
 
