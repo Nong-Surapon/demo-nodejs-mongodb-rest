@@ -2,7 +2,7 @@ version: '3'
 
 services:
     web-node-js:
-        image: atisak/nodejs:latest
+        image: nongdocker/demo-nodejs:latest
         ports:
             - "3000:3000"
         environment:
