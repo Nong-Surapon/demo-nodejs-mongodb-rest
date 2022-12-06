@@ -46,31 +46,16 @@ pipeline {
             }
         }
         
-        stage('tag docker image') {
+        stage('Push docker image') {
             steps {
-               sh "docker tag ${env.image}:${BUILD_NUMBER} ${env.image}:latest"
-            }
-        }
-        
-        stage('Verify new docker image(s)') {
-            steps {
-                sh('docker images')
+                script {
+                    withCredentials([string(credentialsId: 'dockerhub-pwd', variable: 'dockerhubpwd')]) {
+                    sh "docker login -u nongdocker -p${dockerhubpwd}"
+                    sh "docker push ${env.image}:latest"
+                }
             }
         }
 
-        stage('push docker image') {
-            steps {
-               sh "docker push ${env.image}:latest"
-            }
-        }
-        
-        stage('Verify new docker image(s) 2') {
-            steps {
-                sh('docker images')
-            }
-        }
-   
-       
         stage('Deployment'){
             steps {
                 sh "docker-compose up -d"
