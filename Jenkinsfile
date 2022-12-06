@@ -45,7 +45,19 @@ pipeline {
                sh "docker build -t ${env.image} ."
             }
         }
-
+        
+        stage('Verify new docker image(s)') {
+            steps {
+                sh('docker images')
+            }
+        }
+        
+        stage('push docker image') {
+            steps {
+               sh "docker push ${env.image}:latest"
+            }
+        }
+       
         stage('Deployment'){
             steps {
                 sh "docker-compose up -d"
