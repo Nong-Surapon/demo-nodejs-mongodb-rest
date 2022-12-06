@@ -29,15 +29,20 @@ pipeline {
         //     }
         // }
         
-        stage('Build docker image') {
+//         stage('Build docker image') {
+//             steps {
+//                 script {
+//                     docker.withRegistry('', 'dockerhub') {
+//                         def slackImage = docker.build("${env.image}:${BUILD_NUMBER}")
+//                         slackImage.push()
+//                         slackImage.push('latest')
+//                     }
+//                 }
+//             }
+//         }
+        stage('Build docker image) {
             steps {
-                script {
-                    docker.withRegistry('', 'dockerhub') {
-                        def slackImage = docker.build("${env.image}:${BUILD_NUMBER}")
-                        slackImage.push()
-                        slackImage.push('latest')
-                    }
-                }
+               sh "docker build -t ${env.image} ."
             }
         }
 
