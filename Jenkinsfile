@@ -46,7 +46,7 @@ pipeline {
             }
             
         }
-
+        // Test
         // stage('tag docker image') {
         //     steps {
         //        sh "docker tag ${env.image}:${BUILD_NUMBER} ${env.image}:latest"
